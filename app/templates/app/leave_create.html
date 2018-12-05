@@ -6,6 +6,9 @@
             <div class="col-md-6 form-card">
                 <div class="card">
                     <div class="card-body">
+                        {% if error %}
+                        {{ error }}
+                        {% endif %}
                         <div class='title-text' style="margin: 12px 0;">Apply for Leave</div>
                         {% if error_message %}
                             <p><strong>{{ error_message }}</strong></p>

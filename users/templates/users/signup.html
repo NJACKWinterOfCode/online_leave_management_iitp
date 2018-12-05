@@ -4,7 +4,7 @@
     <div class="wrapper">
         <div class="container">
             <h2>Sign Up for OLM IIT Patna</h2>
-            <form class="form-horizontal" action="{% url 'users:confirm-signup' %}" method="post" enctype="multipart/form-data" novalidate>
+            <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="form-group">
