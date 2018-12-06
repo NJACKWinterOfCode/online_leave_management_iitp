@@ -17,6 +17,7 @@ urlpatterns = [
     path('leaves/pending/', views.leaves_pending, name='leaves-pending'),
     path('leaves/past/', views.leaves_past, name='leaves-past'),
     path('leave/<int:pk>/edit/', views.leave_edit, name='leave_edit'),
+    path('leave/<int:pk>/comment/',views.comment,name='comment')
 ]
 if not settings.DEBUG:
     urlpatterns += path('', (r'^static/(?P<path>.*)$', 'django.views.static.serve',
