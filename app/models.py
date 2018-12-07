@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models import CASCADE
 from users.models import ProgramType, DisciplineType, HostelType
 import enum
+from django.contrib.auth.models import User
 
 # model for leave
 from django.urls import reverse
@@ -59,3 +60,8 @@ class LeaveApprovingWarden(models.Model):
                               choices=[(hostel_type.name, hostel_type.value) for hostel_type in HostelType],
                               default=HostelType.BH.name)
     authority = models.OneToOneField('users.ApprovingAuthority', related_name='warden', on_delete=CASCADE, null=True)
+
+class Comment(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    body = models.TextField()
+    leave_id = models.IntegerField(default=1)
