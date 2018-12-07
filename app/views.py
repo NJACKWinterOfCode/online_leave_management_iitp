@@ -133,6 +133,8 @@ def leave_create(request):
         format_str = '%m/%d/%Y'
         dol_str = request.POST.get('date_of_leaving', '')
         dor_str = request.POST.get('date_of_returning', '')
+        if(dol_str>dor_str):
+            return render(request,'app/leave_create.html',{'error_message':'*Date of leaving must be smaller than the Date of returning'})
         dol_obj = datetime.strptime(dol_str, format_str)
         dor_obj = datetime.strptime(dor_str, format_str)
         leave = Leave.objects.create(
