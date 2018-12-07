@@ -5,6 +5,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from app.forms import *
 from app.models import Leave, LeaveApprovingWarden, LeaveApprovingFaculty
 from datetime import datetime
+from .models import Comment
 
 
 def index(request):
@@ -180,18 +181,20 @@ def leave_detail(request, pk):
             'GH': 'Girls Hostel',
             'BH': 'Boys Hostel',
         }
+        comments = Comment.objects.filter(leave_id=pk)
         if user_account.user_type == 'S':
             return render(request, 'app/leave_detail.html', {'leave': leave, 'can_edit': True, 'can_approve': False,
-                                                             'leave_status_values': leave_status_values, 'hostel_type': hostel_type})
+                                                             'leave_status_values': leave_status_values, 'hostel_type': hostel_type,'comments':comments})
         else:
             if user_account.authority.role == 'FAD':
                 return render(request, 'app/leave_detail.html',
                               {'leave': leave, 'can_edit': False, 'can_approve': True, 'is_warden': False,
-                               'leave_status_values': leave_status_values, 'hostel_type': hostel_type})
+                               'leave_status_values': leave_status_values, 'hostel_type': hostel_type,'comments':comments})
             else:
                 return render(request, 'app/leave_detail.html',
                               {'leave': leave, 'can_edit': False, 'can_approve': True, 'is_warden': True,
-                               'leave_status_values': leave_status_values, 'hostel_type': hostel_type})
+                               'leave_status_values': leave_status_values, 'hostel_type': hostel_type,'comments':comments})
+
 
 
 def leave_edit(request, pk):
@@ -257,3 +260,12 @@ def leaves_past(request):
         except:
             leaves = []
         return render(request, 'app/leaves_list.html', {'leaves': leaves, 'can_edit': False, 'leave_status_values': leave_status_values})
+
+def comment(request,pk):
+    if request.method == "POST":
+        comment = Comment()
+        comment.user = request.user
+        comment.body = request.POST['body']
+        comment.leave_id = pk
+        comment.save()
+        return redirect('/leave/' + str(pk) + '/')

@@ -72,6 +72,63 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 ml-2">
+          <h4>Comment</h4>
+        </div>
+        <div class="col-md-7-offset ml-5 pl-5">
+          <button type="button" class="btn" data-toggle="modal" data-target="#myModal">Add Comment</button>
+        </div>
+      </div>
+
+    {% for c in comments.all %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card detail-card">
+                    <div class="card-body">
+                        <div class="card-title" style="font-size: 18px;">
+                            <b>{{ c.user }}</b>
+                        </div>
+                        <p class="card-text">
+                          {{ c.body }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    {% endfor %}
+
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog modalheight">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>Comment</h4>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <form class="commentform" id="commentit" method="POST" action="{% url 'app:comment' leave.id %}">
+              {% csrf_token %}
+              <div class="form-group" style="text-align: center;">
+                  <textarea rows='10' cols='50' placeholder='Comment..' name='body'></textarea>
+              </div>
+            </form>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <a href="javascript:{document.getElementById('commentit').submit()}">
+              <button class="btn btn-block btn-success">Post</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <style>
         .detail-card {
             position: relative;
