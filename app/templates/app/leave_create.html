@@ -14,11 +14,11 @@
                             {% csrf_token %}
                             <div class="form-group">
                                 <label for="reason_for_leave">Reason</label>
-                                <input type="text" rows="5" name='reason_for_leave' class="form-control" id="reason_for_leave" >
+                                <input type="text" rows="5" name='reason_for_leave' class="form-control" id="reason_for_leave" required>
                             </div>
                             <div class="form-group">
                                 <label for="going_to_place">Going to Place</label>
-                                <input type="text" class="form-control" name='going_to_place' id="going_to_place" >
+                                <input type="text" class="form-control" name='going_to_place' id="going_to_place" required>
                             </div>
                             <div class="form-group">
                                 <label for="going_type">Place type</label>
@@ -29,11 +29,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="date_of_leaving">Date of leaving</label>
-                                <input class="form-control" id="date_of_leaving" name="date_of_leaving" placeholder="MM/DD/YYYY" type="text"/>
+                                <input class="form-control" id="date_of_leaving" name="date_of_leaving" placeholder="MM/DD/YYYY" type="text" required/>
                             </div>
                             <div class="form-group">
                                 <label for="date_of_returning">Date of returning</label>
-                                <input class="form-control" id="date_of_returning" name="date_of_returning" placeholder="MM/DD/YYYY" type="text"/>
+                                <input class="form-control" id="date_of_returning" name="date_of_returning" placeholder="MM/DD/YYYY" type="text" required/>
                             </div>
                             <div class="form-group" style="text-align: center;">
                                 <button type="submit" class="btn btn-success">Submit</button>
