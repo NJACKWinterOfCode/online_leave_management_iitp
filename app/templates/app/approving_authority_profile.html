@@ -56,9 +56,21 @@
                             <div class="form-group row">
                                 <label for="designation" class="col-4 col-form-label">Designation</label>
                                 <div class="col-8">
-                                    <input id="designation" name="designation"
-                                           placeholder="Designation" value="{% for k, v in designation_type.items %}{% if k == authority.designation %}{{ v }}{% endif %}{% endfor %}"
+                                    <select id="designation" name="designation"
+                                           placeholder="Designation"
                                            class="form-control here" type="text">
+                                            {% for k, v in designation_type.items %}{% if k == authority.designation %}<option selected="" value = "{{ k }}">{{ v }}{% endif %}
+                                           </option>
+                                           {% endfor %}
+                                           <!--<option value="Assistant Professor">Assistant Professor</option>
+                                           <option value="ASOP">Associate Professor</option>
+                                           <option value="PROF">Professor</option>
+                                           <option value="OTH">Other</option>-->
+
+                                             {% for k, v in designation_type.items %}{% if k != authority.designation %}<option value"{{ k }}">{{ v }}{% endif %}
+                                            </option>
+                                            {% endfor %}
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
